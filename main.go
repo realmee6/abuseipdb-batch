@@ -71,6 +71,7 @@ func sendToAPI(data string, apiKey string) map[string]interface{} {
 
 func saveResult(data string, result map[string]interface{}, resultsDir string) {
 	// Create the JSON file
+	data = strings.ReplaceAll(data, "/", "-") // normalize the file name for subnets defined using CIDR.
 	fileName := filepath.Join(resultsDir, data+".json")
 	jsonFile, _ := os.Create(fileName)
 	defer jsonFile.Close()
